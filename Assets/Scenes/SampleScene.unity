@@ -642,11 +642,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6025712205390315822, guid: 40ff02ddba610394aaf276593ef2b2f9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6025712205875060742, guid: 40ff02ddba610394aaf276593ef2b2f9, type: 3}
       propertyPath: m_Name
       value: Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025712205875060742, guid: 40ff02ddba610394aaf276593ef2b2f9, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6025712205875060858, guid: 40ff02ddba610394aaf276593ef2b2f9, type: 3}
       propertyPath: m_RootOrder

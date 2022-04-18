@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8727111180466465191}
   - component: {fileID: 1605930761508484665}
+  - component: {fileID: 1449052843772767671}
   m_Layer: 0
   m_Name: Room Trigger E
-  m_TagString: Untagged
+  m_TagString: East
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,8 +44,20 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 3, z: 3}
+  m_Size: {x: 0.3, y: 2.9, z: 2.9}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1449052843772767671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366569529769341107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840a956b542f0664d9aea623c01c7719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &397671494826371667
 GameObject:
   m_ObjectHideFlags: 0

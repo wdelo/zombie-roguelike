@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         // Save the movement vector; x -> forward/back, y -> left/right
         Vector2 movementVector = moveAction.ReadValue<Vector2>();
         // Move the player (y is up-down so leave 0)
-        transform.position += new Vector3(-movementVector.x, 0, -movementVector.y) * 4.0f * Time.deltaTime;
+        transform.position += new Vector3(movementVector.x, 0, movementVector.y) * 4.0f * Time.deltaTime;
     }
 
     private void Rotate()

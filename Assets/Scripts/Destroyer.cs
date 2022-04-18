@@ -6,6 +6,12 @@ public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        //Debug.Log(other.gameObject.name + ": " + other.gameObject.tag);
+        if (other.gameObject.CompareTag("RoomPrefab"))
+        {
+            //Debug.Log("hello");
+            Destroy(other.gameObject);
+        }
+        
     }
 }

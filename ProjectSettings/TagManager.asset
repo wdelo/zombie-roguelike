@@ -6,6 +6,11 @@ TagManager:
   tags:
   - SpawnPoint
   - Rooms
+  - RoomPrefab
+  - East
+  - West
+  - South
+  - North
   layers:
   - Default
   - TransparentFX

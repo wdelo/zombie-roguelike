@@ -5,26 +5,30 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private bool fullAuto;
-    [SerializeField] private float rpm;
+    [SerializeField] private float rpm = 260;
     [SerializeField] private float range = 10.0f;
-    [SerializeField] private int damage = 50;
-    [SerializeField] private int currentAmmo;
-    [SerializeField] private int ammoSize;
-    [SerializeField] private int ammoReserves;
+    [SerializeField] private int damage = 24;
+    [SerializeField] private int ammoSize = 12;
+    [SerializeField] private int ammoReserves = 24;
+    [SerializeField] private float reloadSpeed = 1.2f;
 
+    [SerializeField] private int currentAmmo;
     private float secondsToWait;
     private bool canShoot = true;
-    private bool shooting = false;
+    private bool isShooting = false;
+    private bool isReloading = false;
 
     private void Awake()
     {
-        secondsToWait = 1.0f / rpm / 60.0f;
+        secondsToWait = 1.0f / (rpm / 60.0f);
+        currentAmmo = ammoSize;
     }
 
     private void Shoot()
     {
         // play sound
-        Debug.Log("Bang!");
+        //Debug.Log("Bang!");
+        Debug.Log(currentAmmo-1 + "/" + ammoSize);
 
         // spawn muzzle flash particle effect
 
@@ -41,33 +45,68 @@ public class Gun : MonoBehaviour
                 
                 // decrease health
                 hit.collider.gameObject.GetComponent<Health>().DecreaseHealth(damage);
-
+                Debug.Log("Hit enemy!");
             }
         }
-        Debug.DrawRay(transform.parent.position, transform.parent.forward * range, Color.red, 1.0f);
+        //Debug.DrawRay(transform.parent.position, transform.parent.forward * range, Color.red, 1.0f);
 
     }
-    private IEnumerator ShootCoroutine()
+
+    private void Reload()
     {
-        canShoot = false;
-        Shoot();
-        yield return new WaitForSeconds(secondsToWait);
-        canShoot = true;
+        int ammoLeft = ammoReserves - ammoSize;
+        if (ammoLeft < 0)
+        {
+            currentAmmo = ammoReserves;
+            ammoReserves = 0;
+        }
+        else
+        {
+            ammoReserves -= currentAmmo;
+            currentAmmo = ammoSize;
+
+        }
     }
 
     private IEnumerator ShootFullAuto()
     {
-        while (shooting)
+        while (isShooting)
         {
             yield return ShootCoroutine();
         }
     }
 
+    private IEnumerator ShootCoroutine()
+    {
+        canShoot = false;
+        Shoot();
+        currentAmmo--;
+        yield return new WaitForSeconds(secondsToWait);
+        canShoot = true;
+        if (currentAmmo <= 0)
+        {
+            canShoot = false;
+            isShooting = false;
+        } 
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+
+        canShoot = false;
+        isReloading = true;
+        yield return new WaitForSeconds(reloadSpeed);
+        Reload();
+        Debug.Log("Reload complete");
+        isReloading = false;
+        canShoot = true;
+    }
+
     public void StartShooting()
     {
-        if (canShoot)
+        if (canShoot && !isReloading)
         {
-            shooting = true;
+            isShooting = true;
             if (fullAuto) 
                 StartCoroutine("ShootFullAuto");   
             else
@@ -77,7 +116,18 @@ public class Gun : MonoBehaviour
 
     public void StopShooting()
     {
-        shooting = false; 
+        isShooting = false; 
+    }
+
+
+    public void StartReloading()
+    {
+        if (!isReloading && currentAmmo < ammoSize && ammoReserves > 0)
+        {
+            isShooting = false;
+            Debug.Log("Reloading...");
+            StartCoroutine("ReloadCoroutine"); 
+        }
     }
 
 }

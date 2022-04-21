@@ -33,7 +33,9 @@ public class InputManager : MonoBehaviour
 
         inputs.Player.Fire.started += weaponManager.StartFire;
         inputs.Player.Fire.canceled += weaponManager.CancelFire;
+        inputs.Player.Reload.performed += weaponManager.Reload;
         inputs.Player.Fire.Enable();
+        inputs.Player.Reload.Enable();
     }
 
     private void OnDisable()
@@ -43,6 +45,8 @@ public class InputManager : MonoBehaviour
 
         inputs.Player.Fire.started -= weaponManager.StartFire;
         inputs.Player.Fire.canceled -= weaponManager.CancelFire;
+        inputs.Player.Reload.performed -= weaponManager.Reload;
         inputs.Player.Fire.Disable();
+        inputs.Player.Reload.Disable();
     }
 }

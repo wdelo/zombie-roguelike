@@ -11,6 +11,7 @@ TagManager:
   - West
   - South
   - North
+  - Enemy
   layers:
   - Default
   - TransparentFX

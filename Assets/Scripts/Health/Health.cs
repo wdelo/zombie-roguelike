@@ -5,7 +5,6 @@ public class Health : MonoBehaviour
     [SerializeField]
     [Min(0)]
     private int maxHealth;
-    [SerializeField]
     private int currentHealth;
 
     private void Awake()
@@ -40,7 +39,6 @@ public class Health : MonoBehaviour
         {
             ResetHealth();
         }
-        Debug.Log("Increased health by " + amount);
     }
 
     public void ResetHealth()
@@ -50,6 +48,6 @@ public class Health : MonoBehaviour
 
     protected virtual void Kill()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

@@ -1,38 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    private Lab6Inputs inputs;
     private InputAction moveAction;
+    private InputAction mousePosition;
 
     private Plane ground;
 
+    public void Initialize(InputAction moveAction, InputAction mousePosition)
+    {
+        this.moveAction = moveAction;
+        this.mousePosition = mousePosition;
+    }
+
     private void Awake()
     {
-        inputs = new Lab6Inputs();
         ground = new Plane(Vector3.up, 0.0f);
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    private void OnEnable()
-    {
-        moveAction = inputs.Player.Move;
-        moveAction.Enable();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -49,10 +35,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate()
     {
-        Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
+        Vector2 mouseScreenPosition = mousePosition.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
 
-        float enter = 0.0f;
+        float enter;
         if (ground.Raycast(ray, out enter))
         {
             Vector3 hitPoint = ray.GetPoint(enter);
@@ -62,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(transform.position, direction, Color.red);
             Quaternion lookRot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 10.0f);
-
         }
     }
 }

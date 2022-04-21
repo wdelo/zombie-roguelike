@@ -15,14 +15,18 @@ public class BigPropPlacer : MonoBehaviour
     {
         var rand = new System.Random();
         GameObject prop = props[rand.Next(props.Count)];
-        Quaternion rotation = new Quaternion();
-        /*        if (prop.name.Contains("contain"))
-                    rotation.eulerAngles = new Vector3(0, 90, 0);
-                else if (prop.name.Contains("oval"))
-                    rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);*/
-        rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         Vector3 pos = this.transform.position;
         pos.y = 0;
+        if (prop.name.Contains("shelf"))
+            pos = new Vector3(pos.x, pos.y, pos.z - 3);
+        if (prop.name.Contains("palette"))
+            pos.y += 0.61f;
+        Quaternion rotation = new Quaternion();
+        if (prop.name.Contains("contain"))
+            rotation.eulerAngles = new Vector3(0, 0, 0);
+        else
+            rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         Instantiate(prop, pos, rotation, this.transform.parent);
     }
+
 }

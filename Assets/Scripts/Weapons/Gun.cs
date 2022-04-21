@@ -92,7 +92,6 @@ public class Gun : MonoBehaviour
 
     private IEnumerator ReloadCoroutine()
     {
-
         canShoot = false;
         isReloading = true;
         yield return new WaitForSeconds(reloadSpeed);

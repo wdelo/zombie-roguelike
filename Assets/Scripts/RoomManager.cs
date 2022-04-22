@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    private List<GameObject> doors = new List<GameObject>();
+
 
 }
 

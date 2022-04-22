@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class Door : MonoBehaviour
 {
-    [SerializeField] public GameObject currentRoomObj;
-    private CurrentRoom currentRoom;
-    private Camera mainCamera;
+    //[SerializeField] public GameObject currentRoomObj;
+    //private CurrentRoom currentRoom;
+    //private Camera mainCamera;
 
     private void Start()
     {
-        mainCamera = Camera.main;
-        currentRoom = currentRoomObj.GetComponent<CurrentRoom>();
+        //mainCamera = Camera.main;
+        //currentRoom = currentRoomObj.GetComponent<CurrentRoom>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
+    {
+        
+    }
+
+
+    /*private void OnTriggerEnter(Collider other)
     {
         Vector3 direction = other.transform.position - transform.position;
         //Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
@@ -42,5 +48,5 @@ public class MoveCamera : MonoBehaviour
             }
         }
 
-    }
+    }*/
 }

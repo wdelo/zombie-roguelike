@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840a956b542f0664d9aea623c01c7719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorPrefab: {fileID: 3402713353614487812, guid: 78b7494682a93024c938f4d6f06137f8, type: 3}
 --- !u!1001 &180297767778516309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -824,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0270cd6310db34247b0c9c325895e169, type: 2}
     - target: {fileID: 6851546346457414410, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
       propertyPath: m_Name
-      value: S Room Variant
+      value: S Room
       objectReference: {fileID: 0}
     - target: {fileID: 8838565889150253004, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
       propertyPath: m_RootOrder

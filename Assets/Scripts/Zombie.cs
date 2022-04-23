@@ -29,8 +29,10 @@ public class Zombie : MonoBehaviour
             //Debug.Log(Vector3.Distance(transform.position, target.position));
             nav.SetDestination(transform.position);
         }
-        if (Vector3.Distance(transform.position, target.position) < 1)
+        if (Vector3.Distance(transform.position, target.position) < 2)
+        {
             animator.SetBool("Attacking", true);
+        }
         else
             animator.SetBool("Attacking", false);
         animator.SetFloat("Speed", nav.velocity.magnitude);

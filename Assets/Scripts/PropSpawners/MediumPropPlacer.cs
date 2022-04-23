@@ -14,8 +14,7 @@ public class MediumPropPlacer : MonoBehaviour
     private void PlaceProp()
     {
         var rand = new System.Random();
-        //GameObject prop = props[rand.Next(props.Count)];
-        GameObject prop = props[2];
+        GameObject prop = props[rand.Next(props.Count)];
         Vector3 pos = this.transform.position;
         pos.y = 0;
         Quaternion rotation = new Quaternion();

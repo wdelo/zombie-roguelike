@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3137457023906589049}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf8efdf531c88448b1582015a651bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
 --- !u!114 &3137457023906589049
 MonoBehaviour:
   m_ObjectHideFlags: 0

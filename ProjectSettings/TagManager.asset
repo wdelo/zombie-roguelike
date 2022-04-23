@@ -12,6 +12,7 @@ TagManager:
   - South
   - North
   - Enemy
+  - Gun
   layers:
   - Default
   - TransparentFX

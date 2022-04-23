@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    //[SerializeField] public GameObject currentRoomObj;
-    //private CurrentRoom currentRoom;
-    //private Camera mainCamera;
+    [SerializeField] private GameObject doorPrefab;
 
-    private void Start()
-    {
-        //mainCamera = Camera.main;
-        //currentRoom = currentRoomObj.GetComponent<CurrentRoom>();
-    }
+    private GameObject doors;
 
     private void OnTriggerExit(Collider other)
     {
-        
+        Debug.Log("hello");
+        Vector3 direction = other.transform.position - transform.position;
+        Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (gameObject.CompareTag("East") && direction.x > 0
+                || gameObject.CompareTag("West") && direction.x < 0
+                || gameObject.CompareTag("North") && direction.z > 0
+                || gameObject.CompareTag("South") && direction.z < 0)
+            {
+                doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
+            }
+        }
     }
+
+
 
 
     /*private void OnTriggerEnter(Collider other)

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private GameObject currentRoom;
     private GameObject nextCurrentRoom;
 
+    private Camera mainCamera;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        mainCamera = Camera.main;
     }
 
     public static GameManager GetInstance()
@@ -31,7 +35,7 @@ public class GameManager : MonoBehaviour
         {
             currentRoom = nextCurrentRoom;
             nextCurrentRoom = null;
-            Camera.main.transform.position = currentRoom.transform.GetChild(0).position;
+            mainCamera.transform.position = currentRoom.transform.GetChild(0).position;
         }
     }
 
@@ -43,7 +47,7 @@ public class GameManager : MonoBehaviour
         {
             currentRoom = nextCurrentRoom;
             nextCurrentRoom = null;
-            Camera.main.transform.position = currentRoom.transform.GetChild(0).position;
+            mainCamera.transform.position = currentRoom.transform.GetChild(0).position;
         } 
     }
 }

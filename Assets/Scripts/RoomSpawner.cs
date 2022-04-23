@@ -10,7 +10,7 @@ public class RoomSpawner : MonoBehaviour
     private int randomNum;
     private bool spawned = false;
 
-    private void Start()
+    private void Awake()
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplate>();
         Invoke("Spawn", 0.1f);

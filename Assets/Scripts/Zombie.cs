@@ -19,16 +19,16 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, target.position) < 10)
+        //if (Vector3.Distance(transform.position, target.position) < 10)
         {
             
             nav.SetDestination(target.position);
         }
-        else
-        {
+        //else
+        //{
             //Debug.Log(Vector3.Distance(transform.position, target.position));
-            nav.SetDestination(transform.position);
-        }
+            //nav.SetDestination(transform.position);
+        //}
         if (Vector3.Distance(transform.position, target.position) < 2)
         {
             animator.SetBool("Attacking", true);

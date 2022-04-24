@@ -145,9 +145,8 @@ MonoBehaviour:
   range: 10
   damage: 24
   ammoSize: 12
-  ammoReserves: 24
+  maxAmmoReserves: 24
   reloadSpeed: 1.2
-  currentAmmo: 0
 --- !u!1001 &622580192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +186,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7214776478023548969, guid: 38724a4c547f09c42ae92bbc8ae62ffa, type: 3}
+      propertyPath: props.Array.data[3]
+      value: 
+      objectReference: {fileID: 3283893177784608126, guid: 474ac91123106a245acad4c30fc46e99, type: 3}
+    - target: {fileID: 7214776478023548969, guid: 38724a4c547f09c42ae92bbc8ae62ffa, type: 3}
+      propertyPath: props.Array.data[4]
+      value: 
+      objectReference: {fileID: 5691075698856138241, guid: 2fada17a9b244674daa91930ba111c92, type: 3}
+    - target: {fileID: 7214776478023548969, guid: 38724a4c547f09c42ae92bbc8ae62ffa, type: 3}
+      propertyPath: props.Array.data[5]
+      value: 
+      objectReference: {fileID: 8574598304375215846, guid: 6d1421741c5d5c9459e7d766472b73ef, type: 3}
     - target: {fileID: 7361660309264571927, guid: 38724a4c547f09c42ae92bbc8ae62ffa, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -531,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 0}
+  isCleared: 0
 --- !u!4 &1746823806
 Transform:
   m_ObjectHideFlags: 0

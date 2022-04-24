@@ -7,6 +7,7 @@ public class SmallPropPlacer : MonoBehaviour
     [SerializeField]List<GameObject> props = new List<GameObject>();
     void Start()
     {
+        this.gameObject.SetActive(false);
         this.GetComponent<MeshRenderer>().enabled = false;
         PlaceProp();
     }

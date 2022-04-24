@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 483290}
   - component: {fileID: 3331484}
   - component: {fileID: 2377276}
+  - component: {fileID: 512829732640110449}
+  - component: {fileID: 5472727983309676559}
   m_Layer: 0
   m_Name: locker 1
   m_TagString: Untagged
@@ -83,3 +85,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &512829732640110449
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156788}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 10.905001, y: 10.905001, z: 44.780003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 44.780003}
+  m_TimeToStationary: 0.5
+--- !u!65 &5472727983309676559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 21.809744, y: 21.80975, z: 89.55919}
+  m_Center: {x: 0, y: 0, z: 44.779594}

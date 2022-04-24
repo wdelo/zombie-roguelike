@@ -7,6 +7,7 @@ public class BigPropPlacer : MonoBehaviour
     [SerializeField]List<GameObject> props = new List<GameObject>();
     void Start()
     {
+        this.gameObject.SetActive(false);
         this.GetComponent<MeshRenderer>().enabled = false;
         PlaceProp();
     }
@@ -23,10 +24,11 @@ public class BigPropPlacer : MonoBehaviour
             pos.y += 0.61f;
         Quaternion rotation = new Quaternion();
         if (prop.name.Contains("contain"))
-            rotation.eulerAngles = new Vector3(0, 0, 0);
+            rotation.eulerAngles = new Vector3(0, 90, 0);
         else
             rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         Instantiate(prop, pos, rotation, this.transform.parent);
+        Debug.Log(prop + "'s collider: " + prop.GetComponent<BoxCollider>());
     }
 
 }

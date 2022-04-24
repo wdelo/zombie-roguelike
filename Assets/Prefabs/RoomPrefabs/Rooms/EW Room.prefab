@@ -1186,6 +1186,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2059132094746218958, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3390890154952763132, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1194,6 +1198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EW Room
       objectReference: {fileID: 0}
+    - target: {fileID: 7781176014317983339, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
+      propertyPath: zombiePrefab
+      value: 
+      objectReference: {fileID: 5574304938460260285, guid: ae2476bfca7794943849cc5e33633f12, type: 3}
     - target: {fileID: 8838565889150253004, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
       propertyPath: m_RootOrder
       value: 0

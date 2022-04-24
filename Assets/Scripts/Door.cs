@@ -5,8 +5,15 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] private GameObject doorPrefab;
+    //private ZombieSpawner spawner;
 
     private GameObject doors;
+    private RoomManager roomManager;
+
+    private void Start()
+    {
+        roomManager = transform.parent.parent.gameObject.GetComponent<RoomManager>();
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -20,7 +27,12 @@ public class Door : MonoBehaviour
                 || gameObject.CompareTag("North") && direction.z > 0
                 || gameObject.CompareTag("South") && direction.z < 0)
             {
-                doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
+                //transform.parent.gameObject.SetActive(false);
+                if (!roomManager.GetIsCleared())
+                {
+                    roomManager.SpawnZombies();
+                    doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
+                }
             }
         }
     }

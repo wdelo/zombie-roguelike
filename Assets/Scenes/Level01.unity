@@ -338,6 +338,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2829529595331914135, guid: 1a8aea680b476f54fa3145b1665ece5d, type: 3}
+      propertyPath: checkSphereRadius
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829529595331914135, guid: 1a8aea680b476f54fa3145b1665ece5d, type: 3}
+      propertyPath: maxZombiesPerRoom
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3317109175870554742, guid: 1a8aea680b476f54fa3145b1665ece5d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -522,6 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee11c0b6ca48108418b04f65e70af8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 0}
 --- !u!4 &1746823806
 Transform:
   m_ObjectHideFlags: 0

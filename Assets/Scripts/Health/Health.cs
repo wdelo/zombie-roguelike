@@ -7,6 +7,9 @@ public class Health : MonoBehaviour
     private int maxHealth;
     private int currentHealth;
 
+    public delegate void OnDeath(GameObject deadObject);
+    public static OnDeath onDeath;
+
     private void Awake()
     {
         ResetHealth();
@@ -48,6 +51,7 @@ public class Health : MonoBehaviour
 
     protected virtual void Kill()
     {
+        onDeath?.Invoke(gameObject);
         Destroy(gameObject);
     }
 }

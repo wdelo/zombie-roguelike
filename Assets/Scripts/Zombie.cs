@@ -14,7 +14,7 @@ public class Zombie : MonoBehaviour
         nav = this.GetComponent<NavMeshAgent>();
         animator = this.GetComponent<Animator>();
         target = GameObject.Find("Player").transform;
-        Debug.Log(target);
+        //Debug.Log(target);
     }
     // Update is called once per frame
     void Update()

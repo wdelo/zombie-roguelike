@@ -9,10 +9,11 @@ public class Gun : MonoBehaviour
     [SerializeField] private float range = 10.0f;
     [SerializeField] private int damage = 24;
     [SerializeField] private int ammoSize = 12;
-    [SerializeField] private int ammoReserves = 24;
+    [SerializeField] private int maxAmmoReserves = 24;
     [SerializeField] private float reloadSpeed = 1.2f;
 
-    [SerializeField] private int currentAmmo;
+    private int currentAmmo;
+    private int ammoReserves;
     private float secondsToWait;
     private bool canShoot = true;
     private bool isShooting = false;
@@ -22,6 +23,7 @@ public class Gun : MonoBehaviour
     {
         secondsToWait = 1.0f / (rpm / 60.0f);
         currentAmmo = ammoSize;
+        ammoReserves = maxAmmoReserves;
     }
 
     private void Shoot()
@@ -62,7 +64,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            ammoReserves -= currentAmmo;
+            ammoReserves -= ammoSize;
             currentAmmo = ammoSize;
 
         }

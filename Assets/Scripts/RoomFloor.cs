@@ -15,7 +15,8 @@ public class RoomFloor : MonoBehaviour
     {
         if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
         {
-            GameManager.GetInstance().OnRoomEnter(room);
+            roomManager.OnRoomEnter();
+
         }
     }
 
@@ -23,7 +24,7 @@ public class RoomFloor : MonoBehaviour
     {
         if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
         {
-            GameManager.GetInstance().OnRoomExit(room);
+            roomManager.OnRoomExit();
         }
     }
 }

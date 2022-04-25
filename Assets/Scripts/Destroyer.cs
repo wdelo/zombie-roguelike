@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Matthew Manning */
+
 public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.gameObject.name + ": " + other.gameObject.tag);
         if (other.gameObject.CompareTag("SpawnPoint"))
         {
-            //Debug.Log("hello");
             Destroy(other.gameObject);
         }
         

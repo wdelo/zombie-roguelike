@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Matthew Manning */
+
 public class RoomTemplate : MonoBehaviour
 {
     [SerializeField] public GameObject[] bottomRooms;

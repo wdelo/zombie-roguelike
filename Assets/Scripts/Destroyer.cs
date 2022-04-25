@@ -4,14 +4,17 @@ using UnityEngine;
 
 /* Matthew Manning */
 
-public class Destroyer : MonoBehaviour
+namespace Lab6
 {
-    private void OnTriggerEnter(Collider other)
+    public class Destroyer : MonoBehaviour
     {
-        if (other.gameObject.CompareTag("SpawnPoint"))
+        private void OnTriggerEnter(Collider other)
         {
-            Destroy(other.gameObject);
+            if (other.gameObject.CompareTag("SpawnPoint"))
+            {
+                Destroy(other.gameObject);
+            }
+
         }
-        
     }
 }

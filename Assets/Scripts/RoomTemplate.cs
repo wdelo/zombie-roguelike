@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* Matthew Manning */
-
-public class RoomTemplate : MonoBehaviour
+namespace Lab6
 {
-    [SerializeField] public GameObject[] bottomRooms;
-    [SerializeField] public GameObject[] topRooms;
-    [SerializeField] public GameObject[] leftRooms;
-    [SerializeField] public GameObject[] rightRooms;
+    public class RoomTemplate : MonoBehaviour
+    {
+        [SerializeField] public GameObject[] bottomRooms;
+        [SerializeField] public GameObject[] topRooms;
+        [SerializeField] public GameObject[] leftRooms;
+        [SerializeField] public GameObject[] rightRooms;
 
-    public GameObject closedRoom;
+        public GameObject closedRoom;
+    }
 }

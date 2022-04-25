@@ -1,57 +1,60 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+namespace Lab6
 {
-    [SerializeField]
-    [Min(0)]
-    private int maxHealth;
-    private int currentHealth;
-
-    public delegate void OnDeath(GameObject deadObject);
-    public static OnDeath onDeath;
-
-    private void Awake()
+    public class Health : MonoBehaviour
     {
-        ResetHealth();
-    }
+        [SerializeField]
+        [Min(0)]
+        private int maxHealth;
+        private int currentHealth;
 
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
+        public delegate void OnDeath(GameObject deadObject);
+        public static OnDeath onDeath;
 
-    public int GetHealth()
-    {
-        return currentHealth;
-    }
-
-    public void DecreaseHealth(int amount)
-    {
-        currentHealth -= amount;
-
-        if (currentHealth <= 0)
-        {
-            Kill();
-        }
-    }
-    public void IncreaseHealth(int amount)
-    {
-        currentHealth += amount;
-
-        if (currentHealth >= maxHealth)
+        private void Awake()
         {
             ResetHealth();
         }
-    }
 
-    public void ResetHealth()
-    {
-        currentHealth = maxHealth;
-    }
+        public int GetMaxHealth()
+        {
+            return maxHealth;
+        }
 
-    protected virtual void Kill()
-    {
-        onDeath?.Invoke(gameObject);
-        Destroy(gameObject);
+        public int GetHealth()
+        {
+            return currentHealth;
+        }
+
+        public void DecreaseHealth(int amount)
+        {
+            currentHealth -= amount;
+
+            if (currentHealth <= 0)
+            {
+                Kill();
+            }
+        }
+        public void IncreaseHealth(int amount)
+        {
+            currentHealth += amount;
+
+            if (currentHealth >= maxHealth)
+            {
+                ResetHealth();
+            }
+        }
+
+        public void ResetHealth()
+        {
+            currentHealth = maxHealth;
+        }
+
+        protected virtual void Kill()
+        {
+            onDeath?.Invoke(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,24 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+namespace Lab6
 {
+    public class PlayerMovement : MonoBehaviour
+    {
+        [SerializeField] private float speed = 5f;
 
-    [SerializeField] private float speed = 5f;
+        private Animator animator;
 
-    private Animator animator;
-
-    private InputAction moveAction;
-    private InputAction mousePosition;
+        private InputAction moveAction;
+        private InputAction mousePosition;
 
     private Plane ground;
     private LineRenderer line;
 
-    public void Initialize(InputAction moveAction, InputAction mousePosition)
-    {
-        this.moveAction = moveAction;
-        this.mousePosition = mousePosition;
-    }
+        public void Initialize(InputAction moveAction, InputAction mousePosition)
+        {
+            this.moveAction = moveAction;
+            this.mousePosition = mousePosition;
+        }
 
     private void Awake()
     {
@@ -27,11 +28,11 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
-        Move();
-        Rotate();
-    }
+        void Update()
+        {
+            Move();
+            Rotate();
+        }
 
     private void Move()
     {
@@ -43,26 +44,26 @@ public class PlayerMovement : MonoBehaviour
         AnimateMove(movementVector);
     }
 
-    private void AnimateMove(Vector3 movement)
-    {
-        float velocityX = Vector3.Dot(movement, transform.right);
-        float velocityZ = Vector3.Dot(movement, transform.forward);
-
-        animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
-        animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
-    }
-
-    private void Rotate()
-    {
-        Vector2 mouseScreenPosition = mousePosition.ReadValue<Vector2>();
-        Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
-
-        float enter;
-        if (ground.Raycast(ray, out enter))
+        private void AnimateMove(Vector3 movement)
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            hitPoint.y = transform.position.y;
-            Vector3 direction = hitPoint - transform.position;
+            float velocityX = Vector3.Dot(movement, transform.right);
+            float velocityZ = Vector3.Dot(movement, transform.forward);
+
+            animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+            animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
+        }
+
+        private void Rotate()
+        {
+            Vector2 mouseScreenPosition = mousePosition.ReadValue<Vector2>();
+            Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
+
+            float enter;
+            if (ground.Raycast(ray, out enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                hitPoint.y = transform.position.y;
+                Vector3 direction = hitPoint - transform.position;
 
             Debug.DrawRay(transform.position, direction, Color.red);
             line.SetPosition(1, hitPoint);

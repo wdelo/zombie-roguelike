@@ -3,39 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Zombie : MonoBehaviour
+namespace Lab6
 {
-    private Transform target;
-    private NavMeshAgent nav;
-    private Animator animator;
+    public class Zombie : MonoBehaviour
+    {
+        private Transform target;
+        private NavMeshAgent nav;
+        private Animator animator;
+        [SerializeField] float maxSpeed;
 
-    private void Start()
-    {
-        nav = this.GetComponent<NavMeshAgent>();
-        animator = this.GetComponent<Animator>();
-        target = GameObject.Find("Player").transform;
-        //Debug.Log(target);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Vector3.Distance(transform.position, target.position) < 10)
+        private void Start()
         {
-            
+            nav = this.GetComponent<NavMeshAgent>();
+            animator = this.GetComponent<Animator>();
+            target = GameObject.Find("Player").transform;
+        }
+        // Update is called once per frame
+        void Update()
+        {
+            if (nav.velocity.magnitude > maxSpeed)
+                nav.velocity = nav.velocity.normalized*maxSpeed;
             nav.SetDestination(target.position);
+            if (Vector3.Distance(transform.position, target.position) < 2)
+            {
+                animator.SetBool("Attacking", true);
+            }
+            else
+                animator.SetBool("Attacking", false);
+            animator.SetFloat("Speed", nav.velocity.magnitude);
         }
-        //else
-        //{
-            //Debug.Log(Vector3.Distance(transform.position, target.position));
-            //nav.SetDestination(transform.position);
-        //}
-        if (Vector3.Distance(transform.position, target.position) < 2)
-        {
-            animator.SetBool("Attacking", true);
-        }
-        else
-            animator.SetBool("Attacking", false);
-        animator.SetFloat("Speed", nav.velocity.magnitude);
-        //Debug.Log(nav.velocity.magnitude);
     }
 }

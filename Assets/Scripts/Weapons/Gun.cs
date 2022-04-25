@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Gun : MonoBehaviour
+namespace Lab6
 {
-    [SerializeField] private bool fullAuto;
-    [SerializeField] private float rpm = 260;
-    [SerializeField] private float range = 10.0f;
-    [SerializeField] private int damage = 24;
-    [SerializeField] private int ammoSize = 12;
-    [SerializeField] private int maxAmmoReserves = 24;
-    [SerializeField] private float reloadSpeed = 1.2f;
+    public class Gun : MonoBehaviour
+    {
+        [SerializeField] private bool fullAuto;
+        [SerializeField] private float rpm = 260;
+        [SerializeField] private float range = 10.0f;
+        [SerializeField] private int damage = 24;
+        [SerializeField] private int ammoSize = 12;
+        [SerializeField] private int maxAmmoReserves = 24;
+        [SerializeField] private float reloadSpeed = 1.2f;
 
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private ParticleSystem bloodSplatter;
@@ -26,21 +27,31 @@ public class Gun : MonoBehaviour
     private bool isShooting = false;
     private bool isReloading = false;
 
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
 
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-
-        secondsToWait = 1.0f / (rpm / 60.0f);
-        currentAmmo = ammoSize;
-        ammoReserves = maxAmmoReserves;
-    }
-
-    private void Shoot()
-    {
-        // play sound
-        audioSource.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
-        Debug.Log(currentAmmo-1 + "/" + ammoSize);
+            secondsToWait = 1.0f / (rpm / 60.0f);
+            currentAmmo = ammoSize;
+            ammoReserves = maxAmmoReserves;
+        }
+        public int GetCurrentAmmo()
+        {
+            return currentAmmo;
+        }
+        public int GetAmmoSize()
+        {
+            return ammoSize;
+        }
+        public int GetAmmoReserves()
+        {
+            return ammoReserves;
+        }
+        private void Shoot()
+        {
+            // play sound
+            audioSource.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
+            Debug.Log(currentAmmo - 1 + "/" + ammoSize);
 
         // spawn muzzle flash particle effect
         muzzleFlash.Play();
@@ -65,45 +76,45 @@ public class Gun : MonoBehaviour
         }
         Debug.DrawRay(transform.root.position, transform.root.forward * range, Color.red, 1.0f);
 
-    }
-
-    private void Reload()
-    {
-        int ammoLeft = ammoReserves - ammoSize;
-        if (ammoLeft < 0)
-        {
-            currentAmmo = ammoReserves;
-            ammoReserves = 0;
         }
-        else
+
+        private void Reload()
         {
-            ammoReserves -= ammoSize;
-            currentAmmo = ammoSize;
+            int ammoLeft = ammoReserves - ammoSize;
+            if (ammoLeft < 0)
+            {
+                currentAmmo = ammoReserves;
+                ammoReserves = 0;
+            }
+            else
+            {
+                ammoReserves -= ammoSize;
+                currentAmmo = ammoSize;
 
+            }
         }
-    }
 
-    private IEnumerator ShootFullAuto()
-    {
-        while (isShooting)
+        private IEnumerator ShootFullAuto()
         {
-            yield return ShootCoroutine();
+            while (isShooting)
+            {
+                yield return ShootCoroutine();
+            }
         }
-    }
 
-    private IEnumerator ShootCoroutine()
-    {
-        canShoot = false;
-        Shoot();
-        currentAmmo--;
-        yield return new WaitForSeconds(secondsToWait);
-        canShoot = true;
-        if (currentAmmo <= 0)
+        private IEnumerator ShootCoroutine()
         {
             canShoot = false;
-            isShooting = false;
-        } 
-    }
+            Shoot();
+            currentAmmo--;
+            yield return new WaitForSeconds(secondsToWait);
+            canShoot = true;
+            if (currentAmmo <= 0)
+            {
+                canShoot = false;
+                isShooting = false;
+            }
+        }
 
     private IEnumerator ReloadCoroutine()
     {
@@ -117,32 +128,33 @@ public class Gun : MonoBehaviour
         canShoot = true;
     }
 
-    public void StartShooting()
-    {
-        if (canShoot && !isReloading)
+        public void StartShooting()
         {
-            isShooting = true;
-            if (fullAuto) 
-                StartCoroutine("ShootFullAuto");   
-            else
-                StartCoroutine("ShootCoroutine");          
+            if (canShoot && !isReloading)
+            {
+                isShooting = true;
+                if (fullAuto)
+                    StartCoroutine("ShootFullAuto");
+                else
+                    StartCoroutine("ShootCoroutine");
+            }
         }
-    }
 
-    public void StopShooting()
-    {
-        isShooting = false; 
-    }
-
-
-    public void StartReloading()
-    {
-        if (!isReloading && currentAmmo < ammoSize && ammoReserves > 0)
+        public void StopShooting()
         {
             isShooting = false;
-            Debug.Log("Reloading...");
-            StartCoroutine("ReloadCoroutine"); 
         }
-    }
 
+
+        public void StartReloading()
+        {
+            if (!isReloading && currentAmmo < ammoSize && ammoReserves > 0)
+            {
+                isShooting = false;
+                Debug.Log("Reloading...");
+                StartCoroutine("ReloadCoroutine");
+            }
+        }
+
+    }
 }

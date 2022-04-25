@@ -1,30 +1,35 @@
 using UnityEngine;
 
-public class RoomFloor : MonoBehaviour
+/* Matthew Manning */
+
+namespace Lab6
 {
-    private GameObject room;
-    private RoomManager roomManager;
-
-    private void Awake()
+    public class RoomFloor : MonoBehaviour
     {
-        room = transform.parent.gameObject;
-        roomManager = room.GetComponent<RoomManager>();
-    }
+        private GameObject room;
+        private RoomManager roomManager;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
+        private void Awake()
         {
-            roomManager.OnRoomEnter();
-
+            room = transform.parent.gameObject;
+            roomManager = room.GetComponent<RoomManager>();
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            roomManager.OnRoomExit();
+            if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
+            {
+                roomManager.OnRoomEnter();
+
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag != null && other.gameObject.CompareTag("Player"))
+            {
+                roomManager.OnRoomExit();
+            }
         }
     }
 }

@@ -1,46 +1,49 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(BoxCollider))]
-public abstract class Pickup : MonoBehaviour
+namespace Lab6
 {
-    [SerializeField]
-    [Min(0)]
-    private int amount;
-
-    private void OnTriggerEnter(Collider other)
+    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(BoxCollider))]
+    public abstract class Pickup : MonoBehaviour
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            PerformPickup(other.gameObject);
-        }
-    }
+        [SerializeField]
+        [Min(0)]
+        private int amount;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            PerformPickup(other.gameObject);
-        }
-    }
-
-    private void PerformPickup(GameObject player)
-    {
-        if (IsPickupPossible(player))
-        {
-            AudioSource audioSource = GetComponent<AudioSource>();
-            GetComponent<BoxCollider>().enabled = false;
-            ApplyPickup(amount, player);
-            if (audioSource.clip != null)
+            if (other.gameObject.CompareTag("Player"))
             {
-                AudioSource.PlayClipAtPoint(audioSource.clip, transform.position, audioSource.volume);
+                PerformPickup(other.gameObject);
             }
-            Destroy(gameObject);
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                PerformPickup(other.gameObject);
+            }
+        }
+
+        private void PerformPickup(GameObject player)
+        {
+            if (IsPickupPossible(player))
+            {
+                AudioSource audioSource = GetComponent<AudioSource>();
+                GetComponent<BoxCollider>().enabled = false;
+                ApplyPickup(amount, player);
+                if (audioSource.clip != null)
+                {
+                    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position, audioSource.volume);
+                }
+                Destroy(gameObject);
+            }
+        }
+
+        protected abstract void ApplyPickup(int amount, GameObject player);
+
+        protected abstract bool IsPickupPossible(GameObject player);
+
     }
-
-    protected abstract void ApplyPickup(int amount, GameObject player);
-
-    protected abstract bool IsPickupPossible(GameObject player);
-
 }

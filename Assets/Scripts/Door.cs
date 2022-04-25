@@ -2,71 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+/* Matthew Manning */
+namespace Lab6
 {
-    [SerializeField] private GameObject doorPrefab;
-    //private ZombieSpawner spawner;
-
-    private GameObject doors;
-    private RoomManager roomManager;
-
-    private void Start()
+    public class Door : MonoBehaviour
     {
-        roomManager = transform.parent.parent.gameObject.GetComponent<RoomManager>();
-    }
+        [SerializeField] private GameObject doorPrefab;
 
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("hello");
-        Vector3 direction = other.transform.position - transform.position;
-        Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
-        if (other.gameObject.CompareTag("Player"))
+        private GameObject doors;
+        private RoomManager roomManager;
+
+        private void Start()
         {
-            if (gameObject.CompareTag("East") && direction.x > 0
-                || gameObject.CompareTag("West") && direction.x < 0
-                || gameObject.CompareTag("North") && direction.z > 0
-                || gameObject.CompareTag("South") && direction.z < 0)
+            roomManager = transform.parent.parent.gameObject.GetComponent<RoomManager>();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            Debug.Log("hello");
+            Vector3 direction = other.transform.position - transform.position;
+            Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
+            if (other.gameObject.CompareTag("Player"))
             {
-                //transform.parent.gameObject.SetActive(false);
-                if (!roomManager.GetIsCleared())
+                if (gameObject.CompareTag("East") && direction.x > 0
+                    || gameObject.CompareTag("West") && direction.x < 0
+                    || gameObject.CompareTag("North") && direction.z > 0
+                    || gameObject.CompareTag("South") && direction.z < 0)
                 {
-                    roomManager.SpawnZombies();
-                    doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
+                    if (!roomManager.GetIsCleared())
+                    {
+                        roomManager.SpawnZombies();
+                        doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
+                    }
                 }
             }
         }
-    }
 
 
 
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        Vector3 direction = other.transform.position - transform.position;
-        //Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
-        if (other.gameObject.CompareTag("Player"))
+        /*private void OnTriggerEnter(Collider other)
         {
-            currentRoom.currentRoom = transform.parent.gameObject;
-            currentRoom.SpawnZombies();
+            Vector3 direction = other.transform.position - transform.position;
+            //Debug.Log("Object: " + other.transform.name + " Direction: " + direction);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                currentRoom.currentRoom = transform.parent.gameObject;
+                currentRoom.SpawnZombies();
 
-            if (gameObject.CompareTag("West") && direction.x > 0)
-            {
-                mainCamera.transform.Translate(-20f, 0, 0);
-                //currentRoom = transform.parent.gameObject;
+                if (gameObject.CompareTag("West") && direction.x > 0)
+                {
+                    mainCamera.transform.Translate(-20f, 0, 0);
+                    //currentRoom = transform.parent.gameObject;
+                }
+                else if (gameObject.CompareTag("East") && direction.x < 0)
+                {
+                    mainCamera.transform.Translate(20f, 0, 0);
+                }
+                else if (gameObject.CompareTag("North") && direction.z < 0)
+                {
+                    mainCamera.transform.Translate(0, 20f, 0);
+                }
+                else if (gameObject.CompareTag("South") && direction.z > 0)
+                {
+                    mainCamera.transform.Translate(0, -20f, 0);
+                }
             }
-            else if (gameObject.CompareTag("East") && direction.x < 0)
-            {
-                mainCamera.transform.Translate(20f, 0, 0);
-            }
-            else if (gameObject.CompareTag("North") && direction.z < 0)
-            {
-                mainCamera.transform.Translate(0, 20f, 0);
-            }
-            else if (gameObject.CompareTag("South") && direction.z > 0)
-            {
-                mainCamera.transform.Translate(0, -20f, 0);
-            }
-        }
 
-    }*/
+        }*/
+    }
 }

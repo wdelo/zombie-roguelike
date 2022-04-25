@@ -65,10 +65,12 @@ namespace Lab6
                 hitPoint.y = transform.position.y;
                 Vector3 direction = hitPoint - transform.position;
 
-            Debug.DrawRay(transform.position, direction, Color.red);
-            line.SetPosition(1, hitPoint);
-            Quaternion lookRot = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 10.0f);
+                Debug.DrawRay(transform.position, direction, Color.red);
+                line.SetPosition(1, hitPoint);
+                Quaternion lookRot = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 10.0f);
+            }
         }
     }
+
 }

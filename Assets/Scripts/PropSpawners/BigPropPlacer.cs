@@ -1,3 +1,4 @@
+//Oskar Klear
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace Lab6
                 pos = new Vector3(pos.x, pos.y, pos.z - 3);
             if (prop.name.Contains("palette"))
                 pos.y += 0.61f;
+            if (prop.name.Contains("cablereel"))
+                pos.y += 1.64f;
             Quaternion rotation = new Quaternion();
             if (prop.name.Contains("contain"))
                 rotation.eulerAngles = new Vector3(0, 90, 0);

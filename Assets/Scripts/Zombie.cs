@@ -1,3 +1,4 @@
+//Oskar Klear
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,6 @@ namespace Lab6
             animator = this.GetComponent<Animator>();
             target = GameObject.Find("Player").transform;
         }
-        // Update is called once per frame
         void Update()
         {
             if (nav.velocity.magnitude > maxSpeed)

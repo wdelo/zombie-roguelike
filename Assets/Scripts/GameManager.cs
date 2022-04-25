@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/* Matthew Manning and William Delo */
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* Matthew Manning */
+
 public class Door : MonoBehaviour
 {
     [SerializeField] private GameObject doorPrefab;
-    //private ZombieSpawner spawner;
 
     private GameObject doors;
     private RoomManager roomManager;
@@ -27,7 +28,6 @@ public class Door : MonoBehaviour
                 || gameObject.CompareTag("North") && direction.z > 0
                 || gameObject.CompareTag("South") && direction.z < 0)
             {
-                //transform.parent.gameObject.SetActive(false);
                 if (!roomManager.GetIsCleared())
                 {
                     roomManager.SpawnZombies();

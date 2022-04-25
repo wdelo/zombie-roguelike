@@ -12,6 +12,13 @@ public class Gun : MonoBehaviour
     [SerializeField] private int maxAmmoReserves = 24;
     [SerializeField] private float reloadSpeed = 1.2f;
 
+    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private ParticleSystem bloodSplatter;
+    [SerializeField] private AudioClip[] shotSounds;
+    [SerializeField] private AudioClip reloadSound;
+
+    private AudioSource audioSource;
+
     private int currentAmmo;
     private int ammoReserves;
     private float secondsToWait;
@@ -19,8 +26,11 @@ public class Gun : MonoBehaviour
     private bool isShooting = false;
     private bool isReloading = false;
 
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         secondsToWait = 1.0f / (rpm / 60.0f);
         currentAmmo = ammoSize;
         ammoReserves = maxAmmoReserves;
@@ -29,28 +39,31 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {
         // play sound
-        //Debug.Log("Bang!");
+        audioSource.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
         Debug.Log(currentAmmo-1 + "/" + ammoSize);
 
         // spawn muzzle flash particle effect
+        muzzleFlash.Play();
 
         // perform raycast
+        Debug.Log(transform.root.name);
         RaycastHit hit;
-        if (Physics.Raycast(transform.parent.position, transform.parent.forward, out hit, range))
+        if (Physics.Raycast(transform.root.position, transform.root.forward, out hit, range))
         {
             Vector3 hitPoint = hit.point; 
             if (hit.collider.tag != null && hit.collider.CompareTag("Enemy"))
             {
-                // play hit sound
-
                 // spawn blood particle effect
-                
+                ParticleSystem blood = Instantiate(bloodSplatter, hit.point + hit.normal, Quaternion.LookRotation(-hit.normal));
+                blood.Play();
+                Destroy(blood, 1.0f);
+
                 // decrease health
                 hit.collider.gameObject.GetComponent<Health>().DecreaseHealth(damage);
                 Debug.Log("Hit enemy!");
             }
         }
-        //Debug.DrawRay(transform.parent.position, transform.parent.forward * range, Color.red, 1.0f);
+        Debug.DrawRay(transform.root.position, transform.root.forward * range, Color.red, 1.0f);
 
     }
 
@@ -96,6 +109,7 @@ public class Gun : MonoBehaviour
     {
         canShoot = false;
         isReloading = true;
+        audioSource.PlayOneShot(reloadSound);
         yield return new WaitForSeconds(reloadSpeed);
         Reload();
         Debug.Log("Reload complete");

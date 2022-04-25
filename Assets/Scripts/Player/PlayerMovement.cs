@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction mousePosition;
 
     private Plane ground;
+    private LineRenderer line;
 
     public void Initialize(InputAction moveAction, InputAction mousePosition)
     {
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         ground = new Plane(Vector3.up, 0.0f);
+        line = GetComponent<LineRenderer>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -37,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movementVector = new Vector3(inputVector.x, 0, inputVector.y);
         movementVector.Normalize();
         transform.position += movementVector * speed * Time.deltaTime;
-
+        line.SetPosition(0, transform.position);
         AnimateMove(movementVector);
     }
 
@@ -63,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 direction = hitPoint - transform.position;
 
             Debug.DrawRay(transform.position, direction, Color.red);
+            line.SetPosition(1, hitPoint);
             Quaternion lookRot = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, 10.0f);
         }

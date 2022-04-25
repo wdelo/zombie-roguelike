@@ -21,6 +21,11 @@ namespace Lab6
             gun = GetComponentInChildren<Gun>();
         }
 
+        public Gun GetGun()
+        {
+            return gun;
+        }
+
         public void StartFire(InputAction.CallbackContext obj)
         {
             //Debug.Log("Started firing");

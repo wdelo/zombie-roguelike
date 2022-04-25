@@ -6,13 +6,16 @@ namespace Lab6
 
         protected override void ApplyPickup(int amount, GameObject player)
         {
-            // Get player's ammo and give ammo
+            WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+            Gun currentGun = weaponManager.GetGun();
+
         }
 
         protected override bool IsPickupPossible(GameObject player)
         {
-            // Get player's ammo and check if full 
-            return true;
+            WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+            Gun currentGun = weaponManager.GetGun();
+            return currentGun.GetAmmoReserves() < currentGun.GetMaxAmmoReserves();
         }
     }
 }

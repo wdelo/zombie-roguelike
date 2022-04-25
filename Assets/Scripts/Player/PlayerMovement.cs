@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed = 5f;
 
+    private Animator animator;
+
     private InputAction moveAction;
     private InputAction mousePosition;
 
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         ground = new Plane(Vector3.up, 0.0f);
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -30,10 +33,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        // Save the movement vector; x -> forward/back, y -> left/right
-        Vector2 movementVector = moveAction.ReadValue<Vector2>();
-        // Move the player (y is up-down so leave 0)
-        transform.position += new Vector3(movementVector.x, 0, movementVector.y) * speed * Time.deltaTime;
+        Vector2 inputVector = moveAction.ReadValue<Vector2>();
+        Vector3 movementVector = new Vector3(inputVector.x, 0, inputVector.y);
+        movementVector.Normalize();
+        transform.position += movementVector * speed * Time.deltaTime;
+
+        AnimateMove(movementVector);
+    }
+
+    private void AnimateMove(Vector3 movement)
+    {
+        float velocityX = Vector3.Dot(movement, transform.right);
+        float velocityZ = Vector3.Dot(movement, transform.forward);
+
+        animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+        animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
     }
 
     private void Rotate()

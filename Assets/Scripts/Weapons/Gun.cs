@@ -47,6 +47,22 @@ namespace Lab6
         {
             return ammoReserves;
         }
+
+        public int GetMaxAmmoReserves()
+        {
+            return maxAmmoReserves;
+        }
+
+        public void AddAmmo(int amount)
+        {
+            ammoReserves += amount;
+
+            if (ammoReserves >= maxAmmoReserves)
+            {
+                ammoReserves = maxAmmoReserves;
+            }
+        }
+
         private void Shoot()
         {
             // play sound

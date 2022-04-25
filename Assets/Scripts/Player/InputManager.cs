@@ -1,52 +1,54 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class InputManager : MonoBehaviour
+namespace Lab6
 {
-    private Lab6Inputs inputs;
-
-    private PlayerMovement movement;
-    private WeaponManager weaponManager;
-
-    private void Awake()
+    public class InputManager : MonoBehaviour
     {
-        inputs = new Lab6Inputs();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        private Lab6Inputs inputs;
 
-        movement = GetComponent<PlayerMovement>();
-        weaponManager = GetComponent<WeaponManager>();
+        private PlayerMovement movement;
+        private WeaponManager weaponManager;
 
-        InitializeInputs();
-    }
+        private void Awake()
+        {
+            inputs = new Lab6Inputs();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
 
-    private void InitializeInputs()
-    {
-        movement.Initialize(inputs.Player.Move, inputs.Player.MousePosition);
-        weaponManager.Initialize(inputs.Player.Fire, inputs.Player.Reload);
-    }
+            movement = GetComponent<PlayerMovement>();
+            weaponManager = GetComponent<WeaponManager>();
 
-    private void OnEnable()
-    {
-        inputs.Player.Move.Enable();
-        inputs.Player.MousePosition.Enable();
+            InitializeInputs();
+        }
 
-        inputs.Player.Fire.started += weaponManager.StartFire;
-        inputs.Player.Fire.canceled += weaponManager.CancelFire;
-        inputs.Player.Reload.performed += weaponManager.Reload;
-        inputs.Player.Fire.Enable();
-        inputs.Player.Reload.Enable();
-    }
+        private void InitializeInputs()
+        {
+            movement.Initialize(inputs.Player.Move, inputs.Player.MousePosition);
+            weaponManager.Initialize(inputs.Player.Fire, inputs.Player.Reload);
+        }
 
-    private void OnDisable()
-    {
-        inputs.Player.Move.Disable();
-        inputs.Player.MousePosition.Disable();
+        private void OnEnable()
+        {
+            inputs.Player.Move.Enable();
+            inputs.Player.MousePosition.Enable();
 
-        inputs.Player.Fire.started -= weaponManager.StartFire;
-        inputs.Player.Fire.canceled -= weaponManager.CancelFire;
-        inputs.Player.Reload.performed -= weaponManager.Reload;
-        inputs.Player.Fire.Disable();
-        inputs.Player.Reload.Disable();
+            inputs.Player.Fire.started += weaponManager.StartFire;
+            inputs.Player.Fire.canceled += weaponManager.CancelFire;
+            inputs.Player.Reload.performed += weaponManager.Reload;
+            inputs.Player.Fire.Enable();
+            inputs.Player.Reload.Enable();
+        }
+
+        private void OnDisable()
+        {
+            inputs.Player.Move.Disable();
+            inputs.Player.MousePosition.Disable();
+
+            inputs.Player.Fire.started -= weaponManager.StartFire;
+            inputs.Player.Fire.canceled -= weaponManager.CancelFire;
+            inputs.Player.Reload.performed -= weaponManager.Reload;
+            inputs.Player.Fire.Disable();
+            inputs.Player.Reload.Disable();
+        }
     }
 }

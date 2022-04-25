@@ -4,16 +4,18 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavigationBaker : MonoBehaviour
+namespace Lab6
 {
-
-    public NavMeshSurface[] surfaces;
-
-    // Use this for initialization
-    void Start()
+    public class NavigationBaker : MonoBehaviour
     {
-        for (int i = 0; i < surfaces.Length; i++)
-            surfaces[i].BuildNavMesh();
-    }
 
+        public NavMeshSurface[] surfaces;
+
+        void Start()
+        {
+            for (int i = 0; i < surfaces.Length; i++)
+                surfaces[i].BuildNavMesh();
+        }
+
+    }
 }

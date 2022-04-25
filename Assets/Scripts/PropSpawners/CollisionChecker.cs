@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionChecker : MonoBehaviour
+namespace Lab6
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CollisionChecker : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision");
-        if (!collision.gameObject.name.Contains("Player") && !collision.gameObject.name.Contains("Zombie"))
+        // Start is called before the first frame update
+        void Start()
         {
-            Debug.Log("Rotated");
-            collision.gameObject.transform.Rotate(new Vector3(0, 5, 0));
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("Collision");
+            if (!collision.gameObject.name.Contains("Player") && !collision.gameObject.name.Contains("Zombie"))
+            {
+                Debug.Log("Rotated");
+                collision.gameObject.transform.Rotate(new Vector3(0, 5, 0));
+            }
         }
     }
 }

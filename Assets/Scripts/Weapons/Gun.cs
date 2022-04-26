@@ -13,19 +13,19 @@ namespace Lab6
         [SerializeField] private int maxAmmoReserves = 24;
         [SerializeField] private float reloadSpeed = 1.2f;
 
-    [SerializeField] private ParticleSystem muzzleFlash;
-    [SerializeField] private ParticleSystem bloodSplatter;
-    [SerializeField] private AudioClip[] shotSounds;
-    [SerializeField] private AudioClip reloadSound;
+        [SerializeField] private ParticleSystem muzzleFlash;
+        [SerializeField] private ParticleSystem bloodSplatter;
+        [SerializeField] private AudioClip[] shotSounds;
+        [SerializeField] private AudioClip reloadSound;
 
-    private AudioSource audioSource;
+        private AudioSource audioSource;
 
-    private int currentAmmo;
-    private int ammoReserves;
-    private float secondsToWait;
-    private bool canShoot = true;
-    private bool isShooting = false;
-    private bool isReloading = false;
+        private int currentAmmo;
+        private int ammoReserves;
+        private float secondsToWait;
+        private bool canShoot = true;
+        private bool isShooting = false;
+        private bool isReloading = false;
 
         private void Awake()
         {
@@ -104,7 +104,7 @@ namespace Lab6
             }
             else
             {
-                ammoReserves -= ammoSize;
+                ammoReserves -= ammoSize - currentAmmo;
                 currentAmmo = ammoSize;
 
             }

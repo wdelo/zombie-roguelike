@@ -33,7 +33,6 @@ namespace Lab6
             else
                 rotation.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
             Instantiate(prop, pos, rotation, this.transform.parent);
-            Debug.Log(prop + "'s collider: " + prop.GetComponent<BoxCollider>());
         }
 
     }

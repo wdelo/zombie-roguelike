@@ -12,6 +12,7 @@ namespace Lab6
         private NavMeshAgent nav;
         private Animator animator;
         [SerializeField] float maxSpeed;
+        private int timer;
 
         private void Start()
         {
@@ -23,7 +24,10 @@ namespace Lab6
         {
             if (nav.velocity.magnitude > maxSpeed)
                 nav.velocity = nav.velocity.normalized*maxSpeed;
-            nav.SetDestination(target.position);
+            if (Vector3.Distance(transform.position, target.position) > 1)
+                nav.SetDestination(target.position);
+            else
+                nav.SetDestination(transform.position);
             if (Vector3.Distance(transform.position, target.position) < 2)
             {
                 animator.SetBool("Attacking", true);
@@ -31,6 +35,25 @@ namespace Lab6
             else
                 animator.SetBool("Attacking", false);
             animator.SetFloat("Speed", nav.velocity.magnitude);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name.Equals("Player"))
+                StartCoroutine(Damage());
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.name.Equals("Player"))
+                StopCoroutine(Damage());
+        }
+        IEnumerator Damage()
+        {
+            while (true)
+            {
+                target.GetComponent<Health>().DecreaseHealth(5);
+                yield return new WaitForSeconds(1);
+            }
         }
     }
 }

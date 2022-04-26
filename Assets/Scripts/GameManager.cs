@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /* Matthew Manning and William Delo */
 namespace Lab6
@@ -9,12 +10,17 @@ namespace Lab6
 
         private GameObject currentRoom;
         private GameObject nextCurrentRoom;
-
+        private int score;
         private Camera mainCamera;
 
         [SerializeField] public int maxZombiesPerRoom = 5;
         [SerializeField] public float radius = 1;
 
+        private void OnEnable()
+        {
+            Health.onDeath += IncreaseScore;
+            Health.onDeath += PlayerDied;
+        }
         private void Awake()
         {
             if (instance != null && instance != this)
@@ -25,7 +31,7 @@ namespace Lab6
             {
                 instance = this;
             }
-
+            score = 0;
             mainCamera = Camera.main;
         }
 
@@ -55,6 +61,24 @@ namespace Lab6
                 nextCurrentRoom = null;
                 mainCamera.transform.position = currentRoom.transform.GetChild(0).position;
             }
+        }
+        private void PlayerDied(GameObject obj)
+        {
+            if (obj.CompareTag("Player"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+                
+        }
+        private void IncreaseScore(GameObject obj)
+        {
+            if (obj.CompareTag("Enemy"))
+                score += 100;
+
+        }
+        public int GetScore()
+        {
+            return score;
         }
     }
 }

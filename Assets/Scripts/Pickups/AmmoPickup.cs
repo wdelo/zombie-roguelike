@@ -1,4 +1,7 @@
 using UnityEngine;
+
+/* William Delo */
+
 namespace Lab6
 {
     public class AmmoPickup : Pickup
@@ -8,7 +11,7 @@ namespace Lab6
         {
             WeaponManager weaponManager = player.GetComponent<WeaponManager>();
             Gun currentGun = weaponManager.GetGun();
-
+            currentGun.AddAmmo(amount);
         }
 
         protected override bool IsPickupPossible(GameObject player)

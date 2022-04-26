@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* William Delo */
+
 namespace Lab6
 {
     public class Health : MonoBehaviour

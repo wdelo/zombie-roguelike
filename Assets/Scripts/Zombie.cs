@@ -39,15 +39,20 @@ namespace Lab6
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.name.Equals("Player"))
-                StartCoroutine(Damage());
+            if (other.gameObject.name.Equals("Player")) 
+            {
+                StartCoroutine("DamagePlayer"); 
+            }
+                
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.name.Equals("Player"))
-                StopCoroutine(Damage());
+            {
+                StopCoroutine("DamagePlayer");
+            }
         }
-        IEnumerator Damage()
+        IEnumerator DamagePlayer()
         {
             while (true)
             {

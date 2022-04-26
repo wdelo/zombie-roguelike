@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/* Matthew Manning */
+/* Matthew Manning and William Delo */
 
 namespace Lab6
 {

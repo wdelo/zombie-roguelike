@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Matthew Manning */
+/* Matthew Manning and William Delo */
 
 namespace Lab6
 {

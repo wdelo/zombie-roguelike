@@ -9,7 +9,6 @@ namespace Lab6
         {
             Health playerHealth = player.GetComponent<Health>();
             playerHealth.IncreaseHealth(amount);
-            Debug.Log("Gave player " + amount);
         }
 
         protected override bool IsPickupPossible(GameObject player)

@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bab118d6df4d245aa301cb1a8a6c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxZombiesPerRoom: 5
+  radius: 8

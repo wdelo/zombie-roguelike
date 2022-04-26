@@ -28,13 +28,11 @@ namespace Lab6
 
         public void StartFire(InputAction.CallbackContext obj)
         {
-            //Debug.Log("Started firing");
             gun.StartShooting();
         }
 
         public void CancelFire(InputAction.CallbackContext obj)
         {
-            //Debug.Log("Stopped firing");
             gun.StopShooting();
         }
 

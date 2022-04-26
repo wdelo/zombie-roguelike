@@ -12,8 +12,8 @@ namespace Lab6
         private InputAction moveAction;
         private InputAction mousePosition;
 
-    private Plane ground;
-    private LineRenderer line;
+        private Plane ground;
+        private LineRenderer line;
 
         public void Initialize(InputAction moveAction, InputAction mousePosition)
         {
@@ -21,12 +21,12 @@ namespace Lab6
             this.mousePosition = mousePosition;
         }
 
-    private void Awake()
-    {
-        ground = new Plane(Vector3.up, 0.0f);
-        line = GetComponent<LineRenderer>();
-        animator = GetComponentInChildren<Animator>();
-    }
+        private void Awake()
+        {
+            ground = new Plane(Vector3.up, 0.0f);
+            line = GetComponent<LineRenderer>();
+            animator = GetComponentInChildren<Animator>();
+        }
 
         void Update()
         {
@@ -34,15 +34,15 @@ namespace Lab6
             Rotate();
         }
 
-    private void Move()
-    {
-        Vector2 inputVector = moveAction.ReadValue<Vector2>();
-        Vector3 movementVector = new Vector3(inputVector.x, 0, inputVector.y);
-        movementVector.Normalize();
-        transform.position += movementVector * speed * Time.deltaTime;
-        line.SetPosition(0, transform.position);
-        AnimateMove(movementVector);
-    }
+        private void Move()
+        {
+            Vector2 inputVector = moveAction.ReadValue<Vector2>();
+            Vector3 movementVector = new Vector3(inputVector.x, 0, inputVector.y);
+            movementVector.Normalize();
+            transform.position += movementVector * speed * Time.deltaTime;
+            line.SetPosition(0, transform.position);
+            AnimateMove(movementVector);
+        }
 
         private void AnimateMove(Vector3 movement)
         {

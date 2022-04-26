@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/* William Delo */
+
 namespace Lab6
 {
     public class Gun : MonoBehaviour
@@ -39,10 +42,12 @@ namespace Lab6
         {
             return currentAmmo;
         }
+
         public int GetAmmoSize()
         {
             return ammoSize;
         }
+
         public int GetAmmoReserves()
         {
             return ammoReserves;
@@ -67,30 +72,26 @@ namespace Lab6
         {
             // play sound
             audioSource.PlayOneShot(shotSounds[Random.Range(0, shotSounds.Length)]);
-            Debug.Log(currentAmmo - 1 + "/" + ammoSize);
 
-        // spawn muzzle flash particle effect
-        muzzleFlash.Play();
+            // spawn muzzle flash particle effect
+            muzzleFlash.Play();
 
-        // perform raycast
-        Debug.Log(transform.root.name);
-        RaycastHit hit;
-        if (Physics.Raycast(transform.root.position, transform.root.forward, out hit, range))
-        {
-            Vector3 hitPoint = hit.point; 
-            if (hit.collider.tag != null && hit.collider.CompareTag("Enemy"))
+            // perform raycast
+            RaycastHit hit;
+            if (Physics.Raycast(transform.root.position, transform.root.forward, out hit, range))
             {
-                // spawn blood particle effect
-                ParticleSystem blood = Instantiate(bloodSplatter, hit.point + hit.normal, Quaternion.LookRotation(-hit.normal));
-                blood.Play();
-                Destroy(blood, 1.0f);
+                Vector3 hitPoint = hit.point; 
+                if (hit.collider.tag != null && hit.collider.CompareTag("Enemy"))
+                {
+                    // spawn blood particle effect
+                    ParticleSystem blood = Instantiate(bloodSplatter, hit.point + hit.normal, Quaternion.LookRotation(-hit.normal));
+                    blood.Play();
+                    Destroy(blood, 1.0f);
 
-                // decrease health
-                hit.collider.gameObject.GetComponent<Health>().DecreaseHealth(damage);
-                Debug.Log("Hit enemy!");
+                    // decrease health
+                    hit.collider.gameObject.GetComponent<Health>().DecreaseHealth(damage);
+                }
             }
-        }
-        Debug.DrawRay(transform.root.position, transform.root.forward * range, Color.red, 1.0f);
 
         }
 
@@ -132,17 +133,16 @@ namespace Lab6
             }
         }
 
-    private IEnumerator ReloadCoroutine()
-    {
-        canShoot = false;
-        isReloading = true;
-        audioSource.PlayOneShot(reloadSound);
-        yield return new WaitForSeconds(reloadSpeed);
-        Reload();
-        Debug.Log("Reload complete");
-        isReloading = false;
-        canShoot = true;
-    }
+        private IEnumerator ReloadCoroutine()
+        {
+            canShoot = false;
+            isReloading = true;
+            audioSource.PlayOneShot(reloadSound);
+            yield return new WaitForSeconds(reloadSpeed);
+            Reload();
+            isReloading = false;
+            canShoot = true;
+        }
 
         public void StartShooting()
         {
@@ -161,13 +161,11 @@ namespace Lab6
             isShooting = false;
         }
 
-
         public void StartReloading()
         {
             if (!isReloading && currentAmmo < ammoSize && ammoReserves > 0)
             {
                 isShooting = false;
-                Debug.Log("Reloading...");
                 StartCoroutine("ReloadCoroutine");
             }
         }

@@ -31,7 +31,7 @@ namespace Lab6
                 {
                     if (!roomManager.GetIsCleared())
                     {
-                        roomManager.SpawnZombies();
+                        roomManager.SetUpRoom();
                         doors = Instantiate(doorPrefab, transform.parent.parent.position, transform.parent.parent.rotation);
                     }
                 }

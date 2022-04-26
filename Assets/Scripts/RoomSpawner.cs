@@ -43,6 +43,7 @@ namespace Lab6
                         break;
                 }
                 spawned = true;
+                GameManager.GetInstance().IncrementRoomCount();
             }
         }
 
@@ -53,6 +54,7 @@ namespace Lab6
                 if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
                 {
                     Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                    GameManager.GetInstance().DecrementRoomCount();
                     Destroy(gameObject);
                 }
                 spawned = true;

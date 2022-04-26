@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,15 +12,24 @@ namespace Lab6
         private GameObject currentRoom;
         private GameObject nextCurrentRoom;
         private int score;
+        private int roomsCleared;
+        private int totalRoomsInLevel;
         private Camera mainCamera;
 
         [SerializeField] public int maxZombiesPerRoom = 5;
+        [SerializeField] public int maxPickupsPerRoom = 2;
         [SerializeField] public float radius = 1;
 
         private void OnEnable()
         {
             Health.onDeath += IncreaseScore;
             Health.onDeath += PlayerDied;
+        }
+
+        private void OnDisable()
+        {
+            Health.onDeath -= IncreaseScore;
+            Health.onDeath -= PlayerDied;
         }
         private void Awake()
         {
@@ -32,6 +42,8 @@ namespace Lab6
                 instance = this;
             }
             score = 0;
+            roomsCleared = 1;
+            totalRoomsInLevel = 0;
             mainCamera = Camera.main;
         }
 
@@ -79,6 +91,28 @@ namespace Lab6
         public int GetScore()
         {
             return score;
+        }
+
+        public void IncrementRoomCount()
+        {
+            totalRoomsInLevel++;
+            Debug.Log(totalRoomsInLevel);
+        }
+
+        public void DecrementRoomCount()
+        {
+            totalRoomsInLevel--;
+            Debug.Log(totalRoomsInLevel);
+        }
+
+        public void CheckForLevelComplete()
+        {
+            roomsCleared++;
+
+            if (roomsCleared >= totalRoomsInLevel)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 }

@@ -1137,10 +1137,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NE Room
       objectReference: {fileID: 0}
-    - target: {fileID: 7781176014317983339, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
-      propertyPath: zombiePrefab
-      value: 
-      objectReference: {fileID: 5574304938460260285, guid: ae2476bfca7794943849cc5e33633f12, type: 3}
     - target: {fileID: 8838565889150253004, guid: 7f360e7505bac8e4eb345b40f7727351, type: 3}
       propertyPath: m_RootOrder
       value: 0

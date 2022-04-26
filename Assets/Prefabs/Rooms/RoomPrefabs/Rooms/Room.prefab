@@ -677,6 +677,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee11c0b6ca48108418b04f65e70af8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 5574304938460260285, guid: ae2476bfca7794943849cc5e33633f12, type: 3}
+  pickupPrefabs:
+  - {fileID: 4854642819955087895, guid: 8aabc9cff06d70e47a922274a203a215, type: 3}
+  - {fileID: 7239880622953617415, guid: 7dbe5f101a7ac0d4e8caed74134b9ba8, type: 3}
+  isCleared: 0
 --- !u!1 &7827718832224166092
 GameObject:
   m_ObjectHideFlags: 0
